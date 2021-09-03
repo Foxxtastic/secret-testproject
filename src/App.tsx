@@ -1,57 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import 'antd/dist/antd.css';
+import { Menu } from 'antd';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
+import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { SecretDetails } from './components/SecretDetails';
 import './App.css';
 
 function App() {
+
+  const { pathname } = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Layout className="layout">
+      <Header>
+        <Menu theme="dark" mode="horizontal" selectedKeys={pathname === '/retrieve' ? ['Retrieve'] : ['Save']}>
+          <Menu.Item key='Save'><Link to={"/"}>Save</Link></Menu.Item>
+          <Menu.Item key='Retrieve'><Link to={"/retrieve"}>Retrieve</Link></Menu.Item>
+        </Menu>
+      </Header>
+      <Content style={{ padding: '20px 50px' }} >
+        <Switch>
+          <Route path="/" exact ><div>alma</div></Route>
+          <Route path="/retrieve" exact component={SecretDetails} />
+        </Switch>
+      </Content>
+      <Footer>Created by Viktor Fórizs</Footer>
+    </Layout>
   );
 }
 
