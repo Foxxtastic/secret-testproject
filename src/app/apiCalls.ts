@@ -12,13 +12,13 @@ const handleError = () => {
 const getData = (hash: string) => {
     return JSON.stringify({
         query: `query{
-                    secretByHash(hash: "1mekjd"){
-                    id,
-                    hash,
-                    secrettext,
-                    createdat,
-                    expiresat,
-                    remainingviews
+                    secretByHash(hash: "${hash}"){
+                        id,
+                        hash,
+                        secrettext,
+                        createdat,
+                        expiresat,
+                        remainingviews
                     }
                 }`
     });
@@ -33,5 +33,11 @@ export const getSecretDetails = (hash: string) => {
             'Content-Type': 'application/json'
         },
     }).then(res => res.json() as Promise<SecretDetailsResponse>)
+        .then(res => {
+            if (res.data?.secretByHash === null) {
+                throw new Error(`No secret with ${hash}`);
+            }
+            return res
+        })
         .catch(handleError)
 }

@@ -7,8 +7,8 @@ export enum LoadingStatus {
 export type SecretType = {
     id: number,
     hash: string,
-    secretText: string,
-    createdAt: Date,
-    expiresAt: Date,
-    remainingViews: number
+    secrettext: string,
+    createdat: string,
+    expiresat: string,
+    remainingviews: number
 }

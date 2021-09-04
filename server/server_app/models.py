@@ -5,8 +5,8 @@ class SecretModel(models.Model):
     id = id
     hash = models.TextField()
     secrettext = models.TextField()
-    createdat = models.DateField(auto_now_add=True)
-    expiresat = models.DateField(blank=True, null=True)
+    createdat = models.DateTimeField(auto_now_add=True)
+    expiresat = models.DateTimeField(blank=True, null=True)
     remainingviews = models.IntegerField(blank=True, null=True)
 
     class Meta:

@@ -8,6 +8,7 @@
 }
 
 .page-container {
+    position: relative;
     padding: 20px;
     background-color: #f0f2f5;
 }
@@ -15,4 +16,12 @@
 .ant-layout,
 .ant-layout-footer {
     background-color: #dfe4ea;
+}
+
+.ant-layout-footer {
+    text-align: center;
+}
+
+.ant-form-item {
+    padding: 1em;
 }

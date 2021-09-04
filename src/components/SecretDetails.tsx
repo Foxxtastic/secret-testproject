@@ -1,31 +1,32 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { getSecretByHash, secretDetailsSlice, selectSecret, selectStatus } from '../features/secret/secretSlice';
-import { PageContainer } from './PageContainer';
+import { Descriptions, Result } from "antd"
+import { convertToLocalDate } from "../common/convertions";
+import { LoadingStatus, SecretType } from "../common/types";
 
-const hash = "1mekjd";
-export function SecretDetails() {
+type secretDetailsProps = {
+    secret: SecretType | null,
+    status: LoadingStatus
+}
 
-    const secretDetails = useAppSelector(selectSecret);
-    const status = useAppSelector(selectStatus);
-    const dispatch = useDispatch();
+export function SecretDetails({ secret, status }: secretDetailsProps) {
 
-    useEffect(() => {
-        dispatch(getSecretByHash(hash));
-    }, [dispatch, hash])
+    console.log(status);
 
     return (
-        <PageContainer>
-            {secretDetails !== null &&
-                <>
-                    <div>{secretDetails.id} </div>
-                    <div>{secretDetails.hash} </div>
-                    <div>{secretDetails.secretText} </div>
-                    <div>{secretDetails.createdAt} </div>
-                    <div>{secretDetails.expiresAt} </div>
-                    <div>{secretDetails.remainingViews} </div>
-                </>}
-        </PageContainer>
+        <>
+            {secret !== null &&
+                <Descriptions title="Secret text details" bordered>
+                    <Descriptions.Item label="Hash">{secret.hash}</Descriptions.Item>
+                    <Descriptions.Item label="Secret text">{secret?.secrettext}</Descriptions.Item>
+                    <Descriptions.Item label="Created">{convertToLocalDate(secret.createdat)}</Descriptions.Item>
+                    <Descriptions.Item label="Expires">{convertToLocalDate(secret.expiresat)}</Descriptions.Item>
+                    <Descriptions.Item label="Remaining views">{secret.remainingviews}</Descriptions.Item>
+                </Descriptions>}
+            {status === LoadingStatus.Failed &&
+                <Result
+                    status="404"
+                    title="Not found"
+                    subTitle="There is no secret for this hash."
+                />}
+        </>
     )
 }

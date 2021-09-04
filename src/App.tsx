@@ -2,7 +2,8 @@ import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
-import { SecretDetails } from './components/SecretDetails';
+import { SecretForm } from './components/SecretForm';
+import { SaveForm } from './components/SaveForm';
 import './App.css';
 
 function App() {
@@ -19,11 +20,11 @@ function App() {
       </Header>
       <Content style={{ padding: '20px 50px' }} >
         <Switch>
-          <Route path="/" exact ><div>alma</div></Route>
-          <Route path="/retrieve" exact component={SecretDetails} />
+          <Route path="/" exact component={SaveForm} />
+          <Route path="/retrieve" exact component={SecretForm} />
         </Switch>
       </Content>
-      <Footer>Created by Viktor Fórizs</Footer>
+      <Footer>Created by Viktor Fórizs, 2021 august</Footer>
     </Layout>
   );
 }

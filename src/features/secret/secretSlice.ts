@@ -41,7 +41,7 @@ export const secretDetailsSlice = createSlice({
             })
             .addCase(getSecretByHash.fulfilled, (state, action) => {
                 state.status = LoadingStatus.Idle
-                state.item = action.payload.secret
+                state.item = action.payload.data.secretByHash
             })
             .addCase(getSecretByHash.rejected, (state) => {
                 state.status = LoadingStatus.Failed
