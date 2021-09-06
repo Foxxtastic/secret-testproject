@@ -1,4 +1,4 @@
-import { SecretDetailsResponse, SecretInputType } from "./types";
+import { SecretCreateResponse, SecretDetailsResponse, SecretInputType } from "./types";
 
 const baseUrl = "http://localhost:8000/graphql"
 
@@ -25,9 +25,10 @@ const getData = (hash: string) => {
 }
 
 const createData = (secret: SecretInputType) => {
+    console.log(secret)
     return JSON.stringify({
         query: `mutation {
-                    create_secret: createSecret(input: {secrettext: "${secret.secretText}", expiredat: "${secret.expiresAt}", remainingviews: ${secret.remainingViews}}) {
+                    create_secret: createSecret(input: {secrettext: "${secret.secretText}", expiresat: ${secret.expiresAt}, remainingviews: ${secret.remainingViews}}) {
                         secret {
                             id
                             hash
@@ -67,5 +68,12 @@ export const createSecretFetch = (secretInput: SecretInputType) => {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(res => res.json() as Promise<string>)
+    }).then(res => res.json() as Promise<SecretCreateResponse>)
+        .then(res => {
+            if (res.data?.create_secret === null) {
+                throw new Error(`Secret not created`);
+            }
+            return res
+        })
+        .catch(handleError)
 }

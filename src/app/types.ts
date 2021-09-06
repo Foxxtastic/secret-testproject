@@ -8,6 +8,12 @@ export type SecretDetailsResponse = {
 
 export type SecretInputType = {
     secretText: string,
-    expiresAt: string,
+    expiresAt: number,
     remainingViews: number
+}
+
+export type SecretCreateResponse = {
+    data: {
+        create_secret: SecretType
+    }
 }

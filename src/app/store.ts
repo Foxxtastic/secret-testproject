@@ -1,9 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import secretReducer from '../features/secret/secretSlice';
+import errorMessageReducer from '../features/errorMessage/errorMessageSlice';
+import successMessageReducer from '../features/successMessage/successMessageSlice';
 
 export const store = configureStore({
   reducer: {
-    secret: secretReducer
+    secret: secretReducer,
+    errorMessage: errorMessageReducer,
+    successMessage: successMessageReducer
   },
   devTools: true
 });

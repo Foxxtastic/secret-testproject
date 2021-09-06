@@ -36,13 +36,13 @@ export const createSecret = createAsyncThunk(
         const response = await createSecretFetch(secret);
 
         if (response === apiError) {
-            throw new Error("Cannot create Secret!");
+            throw new Error("Secret can't be created!");
         }
         return response;
     }
 )
 
-export const secretDetailsSlice = createSlice({
+export const secretSlice = createSlice({
     name: 'secretData',
     initialState,
     reducers: {},
@@ -63,8 +63,9 @@ export const secretDetailsSlice = createSlice({
             .addCase(createSecret.pending, (state) => {
                 state.status = LoadingStatus.Loading
             })
-            .addCase(createSecret.fulfilled, (state) => {
+            .addCase(createSecret.fulfilled, (state, action) => {
                 state.status = LoadingStatus.Idle
+                state.item = action.payload.data.create_secret
             })
             .addCase(createSecret.rejected, (state) => {
                 state.status = LoadingStatus.Failed
@@ -74,4 +75,4 @@ export const secretDetailsSlice = createSlice({
 
 export const selectSecret = (state: RootState) => state.secret.item;
 export const selectStatus = (state: RootState) => state.secret.status;
-export default secretDetailsSlice.reducer;
+export default secretSlice.reducer;

@@ -1,3 +1,5 @@
+from datetime import datetime
+from datetime import timedelta
 from graphene_django import DjangoObjectType
 import graphene
 from server_app.models import SecretModel
@@ -38,7 +40,7 @@ class Query(graphene.ObjectType):
 
 class SecretsInput(graphene.InputObjectType):
     secrettext = graphene.String()
-    expiredat = graphene.DateTime()
+    expiresat = graphene.Int()
     remainingviews = graphene.Int()
 
 
@@ -53,7 +55,7 @@ class CreateSecret(graphene.Mutation):
         secret = SecretModel()
         secret.hash = ''
         secret.secrettext = input.secrettext
-        secret.expiresat = input.expiredat
+        secret.expiresat = datetime.utcnow() + timedelta(minutes=input.expiresat)
         secret.remainingviews = input.remainingviews
         secret.save()
         secret.hash = create_hashid(secret.id)
