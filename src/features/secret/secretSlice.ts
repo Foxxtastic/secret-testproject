@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apiError, getSecretDetails } from "../../app/apiCalls";
+import { apiError, createSecretFetch, getSecretDetails } from "../../app/apiCalls";
 import { RootState } from "../../app/store";
+import { SecretInputType } from "../../app/types";
 import { LoadingStatus, SecretType } from "../../common/types";
 
 export interface SecretState {
@@ -29,6 +30,18 @@ export const getSecretByHash = createAsyncThunk(
     }
 )
 
+export const createSecret = createAsyncThunk(
+    'secret/createData',
+    async (secret: SecretInputType) => {
+        const response = await createSecretFetch(secret);
+
+        if (response === apiError) {
+            throw new Error("Cannot create Secret!");
+        }
+        return response;
+    }
+)
+
 export const secretDetailsSlice = createSlice({
     name: 'secretData',
     initialState,
@@ -46,7 +59,16 @@ export const secretDetailsSlice = createSlice({
             .addCase(getSecretByHash.rejected, (state) => {
                 state.status = LoadingStatus.Failed
                 state.item = null;
-            });
+            })
+            .addCase(createSecret.pending, (state) => {
+                state.status = LoadingStatus.Loading
+            })
+            .addCase(createSecret.fulfilled, (state) => {
+                state.status = LoadingStatus.Idle
+            })
+            .addCase(createSecret.rejected, (state) => {
+                state.status = LoadingStatus.Failed
+            })
     },
 });
 

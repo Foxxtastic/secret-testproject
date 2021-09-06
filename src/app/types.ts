@@ -5,3 +5,9 @@ export type SecretDetailsResponse = {
         secretByHash: SecretType
     }
 }
+
+export type SecretInputType = {
+    secretText: string,
+    expiresAt: string,
+    remainingViews: number
+}

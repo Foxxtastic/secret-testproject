@@ -38,7 +38,7 @@ class Query(graphene.ObjectType):
 
 class SecretsInput(graphene.InputObjectType):
     secrettext = graphene.String()
-    expiredat = graphene.Date()
+    expiredat = graphene.DateTime()
     remainingviews = graphene.Int()
 
 
