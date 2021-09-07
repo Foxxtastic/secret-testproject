@@ -1,9 +1,11 @@
-import { Input, Form, Button, Row, Col, Divider, InputNumber, Spin, message } from 'antd';
+import { Input, Form, Button, Row, Col, Divider, InputNumber, Spin } from 'antd';
 import Title from 'antd/lib/typography/Title';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { LoadingStatus } from '../common/types';
-import { createSecret, selectSecret, selectStatus } from '../features/secret/secretSlice';
+import { createSecret, reset, selectSecret, selectStatus } from '../features/secret/secretSlice';
 import { PageContainer } from './PageContainer';
 
 type FormInputsType = {
@@ -16,9 +18,22 @@ export function SaveForm() {
 
     const [form] = Form.useForm();
     const status = useAppSelector(selectStatus);
+    const secretDetails = useAppSelector(selectSecret) as any;
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const isLoading = status === LoadingStatus.Loading;
+
+    useEffect(() => {
+        dispatch(reset());
+        console.log("aaaa")
+    }, [dispatch])
+
+    useEffect(() => {
+        if (secretDetails !== null && secretDetails.secret !== undefined) {
+            history.push(`/retrieve/?hash=${secretDetails.secret.hash}`)
+        }
+    }, [secretDetails, history])
 
     const onFinish = (values: FormInputsType) => {
         dispatch(createSecret(values));

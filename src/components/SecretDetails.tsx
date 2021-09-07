@@ -9,8 +9,6 @@ type secretDetailsProps = {
 
 export function SecretDetails({ secret, status }: secretDetailsProps) {
 
-    console.log(status);
-
     return (
         <>
             {secret !== null &&

@@ -43,9 +43,11 @@ export const createSecret = createAsyncThunk(
 )
 
 export const secretSlice = createSlice({
-    name: 'secretData',
+    name: 'secret',
     initialState,
-    reducers: {},
+    reducers: {
+        reset: () => initialState
+    },
 
     extraReducers: (builder) => {
         builder
@@ -72,6 +74,8 @@ export const secretSlice = createSlice({
             })
     },
 });
+
+export const { reset } = secretSlice.actions;
 
 export const selectSecret = (state: RootState) => state.secret.item;
 export const selectStatus = (state: RootState) => state.secret.status;

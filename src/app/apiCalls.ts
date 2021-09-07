@@ -25,7 +25,6 @@ const getData = (hash: string) => {
 }
 
 const createData = (secret: SecretInputType) => {
-    console.log(secret)
     return JSON.stringify({
         query: `mutation {
                     create_secret: createSecret(input: {secrettext: "${secret.secretText}", expiresat: ${secret.expiresAt}, remainingviews: ${secret.remainingViews}}) {

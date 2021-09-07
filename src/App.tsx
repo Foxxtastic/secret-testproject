@@ -37,18 +37,18 @@ function App() {
   return (
     <Layout className="layout">
       <Header>
-        <Menu theme="dark" mode="horizontal" selectedKeys={pathname === '/retrieve' ? ['Retrieve'] : ['Create']}>
+        <Menu theme="dark" mode="horizontal" selectedKeys={pathname === '/' ? ['Create'] : ['Retrieve']}>
           <Menu.Item key='Create'><Link to={"/"}>Create secret</Link></Menu.Item>
-          <Menu.Item key='Retrieve'><Link to={"/retrieve"}>Retrieve secret</Link></Menu.Item>
+          <Menu.Item key='Retrieve'><Link to={"/retrieve/"}>Retrieve secret</Link></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '20px 50px' }} >
         <Switch>
           <Route path="/" exact component={SaveForm} />
-          <Route path="/retrieve" exact component={SecretForm} />
+          <Route path="/retrieve/" exact component={SecretForm} />
         </Switch>
       </Content>
-      <Footer>Created by Viktor Fórizs, 2021 august</Footer>
+      <Footer>Created by Viktor Fórizs, 2021 sep.</Footer>
     </Layout>
   );
 }

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createSecret, getSecretByHash } from '../secret/secretSlice';
+import { createSecret } from '../secret/secretSlice';
 
 export interface SuccessMessageState {
     value: string | undefined;
