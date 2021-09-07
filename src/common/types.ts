@@ -10,5 +10,6 @@ export type SecretType = {
     secrettext: string,
     createdat: string,
     expiresat: string,
-    remainingviews: number
+    maximumviews: number,
+    currentviews: number
 }

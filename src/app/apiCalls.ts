@@ -18,7 +18,8 @@ const getData = (hash: string) => {
                         secrettext,
                         createdat,
                         expiresat,
-                        remainingviews
+                        maximumviews,
+                        currentviews
                     }
                 }`
     });
@@ -27,14 +28,14 @@ const getData = (hash: string) => {
 const createData = (secret: SecretInputType) => {
     return JSON.stringify({
         query: `mutation {
-                    create_secret: createSecret(input: {secrettext: "${secret.secretText}", expiresat: ${secret.expiresAt}, remainingviews: ${secret.remainingViews}}) {
+                    create_secret: createSecret(input: {secrettext: "${secret.secretText}", expiresat: ${secret.expiresAt}, maximumviews: ${secret.remainingViews}}) {
                         secret {
                             id
                             hash
                             secrettext
                             createdat
                             expiresat
-                            remainingviews
+                            maximumviews
                         }
                     }
                 }`

@@ -17,7 +17,8 @@ export function SecretDetails({ secret, status }: secretDetailsProps) {
                     <Descriptions.Item label="Secret text">{secret?.secrettext}</Descriptions.Item>
                     <Descriptions.Item label="Created">{convertToLocalDate(secret.createdat)}</Descriptions.Item>
                     <Descriptions.Item label="Expires">{convertToLocalDate(secret.expiresat)}</Descriptions.Item>
-                    <Descriptions.Item label="Remaining views">{secret.remainingviews}</Descriptions.Item>
+                    <Descriptions.Item label="Maximum views">{secret.maximumviews}</Descriptions.Item>
+                    <Descriptions.Item label="Current views">{secret.currentviews}</Descriptions.Item>
                 </Descriptions>}
             {status === LoadingStatus.Failed &&
                 <Result

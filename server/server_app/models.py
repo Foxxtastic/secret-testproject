@@ -7,7 +7,8 @@ class SecretModel(models.Model):
     secrettext = models.TextField()
     createdat = models.DateTimeField(auto_now_add=True)
     expiresat = models.DateTimeField(blank=True, null=True)
-    remainingviews = models.IntegerField(blank=True, null=True)
+    maximumviews = models.IntegerField()
+    currentviews = models.IntegerField()
 
     class Meta:
         managed = False

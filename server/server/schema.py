@@ -4,6 +4,9 @@ from graphene_django import DjangoObjectType
 import graphene
 from server_app.models import SecretModel
 from helpers.create_hashid import create_hashid
+import rsa
+
+publicKey, privateKey = rsa.newkeys(512)
 
 
 def getSecretHash(id: int) -> str:
@@ -19,7 +22,8 @@ class SecretsType(DjangoObjectType):
             'secrettext',
             'createdat',
             'expiresat',
-            'remainingviews'
+            'maximumviews',
+            'currentviews'
         )
 
 
@@ -33,7 +37,10 @@ class Query(graphene.ObjectType):
 
     def resolve_secret_by_hash(root, info, hash):
         try:
-            return SecretModel.objects.get(hash=hash)
+            secret: SecretModel = SecretModel.objects.get(hash=hash)
+            secret.currentviews = + 1
+            secret.save()
+            return secret
         except SecretModel.DoesNotExist:
             return None
 
@@ -41,7 +48,7 @@ class Query(graphene.ObjectType):
 class SecretsInput(graphene.InputObjectType):
     secrettext = graphene.String()
     expiresat = graphene.Int()
-    remainingviews = graphene.Int()
+    maximumviews = graphene.Int()
 
 
 class CreateSecret(graphene.Mutation):
@@ -54,9 +61,10 @@ class CreateSecret(graphene.Mutation):
     def mutate(cls, root, info, input: SecretsInput):
         secret = SecretModel()
         secret.hash = ''
-        secret.secrettext = input.secrettext
+        secret.secrettext = rsa.encrypt(input.secrettext.encode(), publicKey)
         secret.expiresat = datetime.utcnow() + timedelta(minutes=input.expiresat)
-        secret.remainingviews = input.remainingviews
+        secret.maximumviews = input.maximumviews
+        secret.currentviews = 0
         secret.save()
         secret.hash = create_hashid(secret.id)
         secret.save()
