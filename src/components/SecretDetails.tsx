@@ -1,5 +1,5 @@
 import { Descriptions, Result } from "antd"
-import { convertToLocalDate } from "../common/convertions";
+import { formatDateTime } from "../common/conversions";
 import { LoadingStatus, SecretType } from "../common/types";
 
 type secretDetailsProps = {
@@ -15,8 +15,8 @@ export function SecretDetails({ secret, status }: secretDetailsProps) {
                 <Descriptions title="Secret text details" bordered>
                     <Descriptions.Item label="Hash">{secret.hash}</Descriptions.Item>
                     <Descriptions.Item label="Secret text">{secret?.secrettext}</Descriptions.Item>
-                    <Descriptions.Item label="Created">{convertToLocalDate(secret.createdat)}</Descriptions.Item>
-                    <Descriptions.Item label="Expires">{convertToLocalDate(secret.expiresat)}</Descriptions.Item>
+                    <Descriptions.Item label="Created">{formatDateTime(secret.createdat)}</Descriptions.Item>
+                    <Descriptions.Item label="Expires">{formatDateTime(secret.expiresat)}</Descriptions.Item>
                     <Descriptions.Item label="Maximum views">{secret.maximumviews}</Descriptions.Item>
                     <Descriptions.Item label="Current views">{secret.currentviews}</Descriptions.Item>
                 </Descriptions>}
@@ -24,7 +24,7 @@ export function SecretDetails({ secret, status }: secretDetailsProps) {
                 <Result
                     status="404"
                     title="Not found"
-                    subTitle="There is no secret for this hash."
+                    subTitle="There is no secret for this hash or the secret has expired."
                 />}
         </>
     )

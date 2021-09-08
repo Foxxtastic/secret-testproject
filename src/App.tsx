@@ -48,7 +48,7 @@ function App() {
           <Route path="/retrieve/" exact component={SecretForm} />
         </Switch>
       </Content>
-      <Footer>Created by Viktor Fórizs, 2021 sep.</Footer>
+      <Footer>Created by Viktor Fórizs, 2021 September.</Footer>
     </Layout>
   );
 }
