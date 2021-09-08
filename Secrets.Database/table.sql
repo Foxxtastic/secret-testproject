@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS Secrets(
+	id SERIAL PRIMARY KEY,
+	hash TEXT NOT NULL,
+	secrettext TEXT NOT NULL,
+	createdat TIMESTAMP NOT NULL,
+	expiresat TIMESTAMP NULL,
+	maximumviews INTEGER NOT NULL,
+	currentviews INTEGER NOT NULL
+)

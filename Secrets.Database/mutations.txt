@@ -1,0 +1,45 @@
+Create
+
+mutation {
+  create_secret: createSecret(input: {secrettext: "körte", expiredat: "2025-01-01", remainingviews: 20}) {
+    secret {
+      id
+      hash
+      secrettext
+      createdat
+      expiresat
+      maximumviews
+      currentviews
+    }
+  }
+}
+
+Query all:
+
+query{secrets {
+  id,
+  hash,
+  secrettext,
+  createdat,
+  expiresat,
+  maximumviews,
+  currentviews
+}}
+
+Query by hash:
+
+query{
+  secretByHash(hash: "1mekjd"){
+    id,
+    hash,
+    secrettext,
+    createdat,
+    expiresat,
+    maximumviews,
+    currentviews
+  }
+}
+
+
+
+
