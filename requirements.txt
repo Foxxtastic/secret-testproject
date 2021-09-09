@@ -1,6 +1,7 @@
 django
 gunicorn
 django-heroku
+django-cors-headers
 graphene
 graphene-django
 Hashids
