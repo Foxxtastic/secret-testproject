@@ -3,6 +3,8 @@
 import os
 import sys
 
+print("manage.py running...")
+
 
 def main():
     """Run administrative tasks."""
