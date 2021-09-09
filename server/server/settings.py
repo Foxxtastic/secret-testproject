@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'secretsdb',
-        'USER': 'postgres',
-        'PASSWORD': 'Foxtastic',
-        'HOST': 'localhost',
-        'PORT': ''
+        'NAME': 'db24aeokm6o5f7',
+        'USER': 'rvtfbmearxpvts',
+        'PASSWORD': '754195933ec4e59c9bef8903c5af7aeaa47fdce0c70da509e49b9ad0e04d8b4d',
+        'HOST': 'ec2-18-235-45-217.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
