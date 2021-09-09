@@ -5,4 +5,4 @@ from django.apps import AppConfig
 class ServerAppConfig(AppConfig):
     create_keys()
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'server_app'
+    name = 'server.server_app'

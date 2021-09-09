@@ -2,8 +2,8 @@ import base64
 from datetime import datetime
 from datetime import timedelta
 from graphene_django import DjangoObjectType
+from .server_app.models import SecretModel
 import graphene
-from server_app.models import SecretModel
 from helpers.create_hashid import create_hashid
 import rsa
 

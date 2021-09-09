@@ -2,8 +2,6 @@ import os
 from pathlib import Path
 import django_heroku
 
-django_heroku.settings(locals())
-
 """
 Django settings for server project.
 
@@ -16,10 +14,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print("base dir", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -52,8 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'server.server_app',
-    'graphene_django'
+    'graphene_django',
+    'server.server_app'
 ]
 
 MIDDLEWARE = [
@@ -147,3 +144,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+django_heroku.settings(locals())
