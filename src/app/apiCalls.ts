@@ -1,6 +1,6 @@
 import { SecretCreateResponse, SecretDetailsResponse, SecretInputType } from "./types";
 
-const baseUrl = "http://localhost:8000/graphql"
+const baseUrl = "https://secrets-testproject.herokuapp.com/graphql"
 
 export const apiError = "error";
 
