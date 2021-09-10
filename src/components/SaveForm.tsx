@@ -26,7 +26,6 @@ export function SaveForm() {
 
     useEffect(() => {
         dispatch(reset());
-        console.log("aaaa")
     }, [dispatch])
 
     useEffect(() => {
